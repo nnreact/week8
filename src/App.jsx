@@ -20,21 +20,28 @@ function App() {
     // setList(updatedArray);
 
     // OPTION 2
-    setList([...list, inputValue]);
+    // setList([...list, inputValue]);
 
     // OPTION 3
-    // const oldArray = list;
-    // list.push(inputValue);
-    // setList(oldArray);
+    const currentArray = list;
+    currentArray.push(inputValue);
+    setList(currentArray);
 
     setInputValue('');
   }
 
+  const handleDelete = (indexToDelete) => {
+    var currentArray = list;
+    currentArray = currentArray.filter((item, index) => {
+      return index !== indexToDelete
+    })
+    setList(currentArray)
+  }
 
   return (
     <div>
       <ListHeader handleAdd={handleAdd} handleInputChange={handleInputChange} inputValue={inputValue} />
-      <ListBody listItems={list} />
+      <ListBody handleDelete={handleDelete} listItems={list} />
     </div>
   )
 }
